@@ -10,16 +10,24 @@ import { ApplicationStore } from "../index";
 
 import { getToken, setToken, removeToken } from "../../services/auth";
 
+const userDetails = {
+  name: "",
+  email: "",
+  id: "",
+};
+
+if (localStorage.getItem("userDetials")) {
+  const data = JSON.parse(localStorage.getItem("userDetials") || "");
+  userDetails.name = data.displayName;
+  userDetails.email = data.email;
+  userDetails.id = data.uid;
+}
 const store = Immutable.from<AuthState>({
   auth: {},
   error: false,
   isAuth: getToken() !== null,
   loading: false,
-  userDetails: {
-    name: "",
-    email: "",
-    id: "",
-  },
+  userDetails,
 });
 
 const reducer: Reducer<ImmutableObjectMixin<AuthState> & AuthState> = (

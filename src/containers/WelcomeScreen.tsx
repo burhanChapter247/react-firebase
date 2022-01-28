@@ -16,7 +16,7 @@ export const WelcomeScreen: React.FC<any> = () => {
   return (
     <div>
       <h1>Dashboard!</h1>
-      <h3>Howdy, {/* {userDetails.name} */}</h3>
+      <h3>Howdy, {userDetails.name}</h3>
 
       <button onClick={() => history.push("/channel")}>New channel</button>
       <button onClick={() => dispatch(AuthActions.signOut())}> Logout</button>

@@ -68,6 +68,10 @@ export const View: React.FC<any> = (props: any) => {
     setInput(postInitialState);
   };
 
+  const viewChannel = (id: string) => {
+    history.push(`/post/${id}`);
+  };
+
   const { subject, body } = input;
 
   return (
@@ -94,7 +98,9 @@ export const View: React.FC<any> = (props: any) => {
       <h4>List Post</h4>
       <ul>
         {postList.map((list: any) => (
-          <li key={list.id}>{list.subject}</li>
+          <li key={list.id} onClick={(e) => viewChannel(list.id)}>
+            {list.subject}
+          </li>
         ))}
       </ul>
     </div>

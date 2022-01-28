@@ -1,7 +1,9 @@
 import { TYPES_CONST } from "../env";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { initializeDb } from "./firestore";
 
 export const AuthSignInService = async () => {
+  initializeDb();
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
 
