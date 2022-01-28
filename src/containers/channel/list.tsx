@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { collection, onSnapshot } from "firebase/firestore";
+import { useSelector } from "react-redux";
+import { collection, onSnapshot, where, query } from "firebase/firestore";
+import { ApplicationStore } from "../../store";
 
 import { initializeDb } from "../../services/firestore";
 
@@ -9,8 +11,17 @@ export const List: React.FC<any> = () => {
   const db = initializeDb();
   const [channelList, setChannelList] = useState<any>([]);
 
+  const userDetails = useSelector((state: ApplicationStore) => {
+    return state.auth.userDetails;
+  });
+
   useEffect(() => {
-    const unsub = onSnapshot(collection(db, "channel"), (snapshot: any) => {
+    const q = query(
+      collection(db, "channel"),
+      where("domainId", "==", userDetails.domainId)
+    );
+
+    const unsub = onSnapshot(q, (snapshot: any) => {
       const list: any = [];
       snapshot.forEach((channelSnapshot: any) => {
         list.push({ id: channelSnapshot.id, ...channelSnapshot.data() });

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Route, RouteProps, Redirect, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import { CreateChannelService } from "../../services/firestore";
+import { ApplicationStore } from "../../store";
 
 const channelInitialState = {
   name: "",
@@ -11,13 +12,16 @@ const channelInitialState = {
 export const Add: React.FC<any> = () => {
   let history = useHistory();
   const [input, setInput] = useState<any>(channelInitialState);
-
-  const { name } = input;
+  const userDetails = useSelector((state: ApplicationStore) => {
+    return state.auth.userDetails;
+  });
 
   const Create = () => {
-    CreateChannelService(input);
+    CreateChannelService({ ...input, domainId: userDetails.domainId });
     setInput(channelInitialState);
   };
+
+  const { name } = input;
 
   return (
     <div>

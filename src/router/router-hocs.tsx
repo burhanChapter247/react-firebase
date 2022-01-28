@@ -17,10 +17,6 @@ export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
   ...rest
 }) => {
   const { isAuth } = useSelector((state: ApplicationStore) => {
-    console.log(
-      "PrivateRoutePrivateRoutePrivateRoutePrivateRoutePrivateRoute",
-      state
-    );
     return {
       isAuth: AuthSelectors.isAuth(state),
     };
@@ -38,7 +34,6 @@ export const PrivateRoute: React.FC<PrivateRouteProps & RouteProps> = ({
 
 export const RedirectRoute: React.FC<PrivateRouteProps> = () => {
   const { isAuth } = useSelector((state: ApplicationStore) => {
-    console.log("RedirectRouteRedirectRouteRedirectRouteRedirectRoute", state);
     return {
       isAuth: AuthSelectors.isAuth(state),
     };
@@ -60,7 +55,6 @@ export const HOCSignIn: React.FC<PrivateRouteProps & RouteProps> = ({
   ...rest
 }) => {
   const { isAuth } = useSelector((state: ApplicationStore) => {
-    console.log("HOCSignInHOCSignInHOCSignInHOCSignInHOCSignIn", state);
     return {
       isAuth: AuthSelectors.isAuth(state),
     };

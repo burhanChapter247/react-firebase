@@ -14,6 +14,7 @@ const userDetails = {
   name: "",
   email: "",
   id: "",
+  domainId: "",
 };
 
 if (localStorage.getItem("userDetials")) {
@@ -21,6 +22,7 @@ if (localStorage.getItem("userDetials")) {
   userDetails.name = data.displayName;
   userDetails.email = data.email;
   userDetails.id = data.uid;
+  userDetails.domainId = data.domainId;
 }
 const store = Immutable.from<AuthState>({
   auth: {},
@@ -45,6 +47,7 @@ const reducer: Reducer<ImmutableObjectMixin<AuthState> & AuthState> = (
           name: action.payload.displayName,
           email: action.payload.email,
           id: action.payload.uid,
+          domainId: action.payload.domainId,
         },
       });
 
