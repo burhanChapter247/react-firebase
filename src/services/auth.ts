@@ -14,7 +14,6 @@ export const AuthSignInService = async () => {
         // The signed-in user info.
         const user = result.user;
 
-        //console.log("useruseruseruseruseruser", user);
         resolve(user);
         // ...
       })

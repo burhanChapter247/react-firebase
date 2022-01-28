@@ -1,14 +1,34 @@
-import React from "react";
-import { Route, RouteProps, Redirect } from "react-router-dom";
+import React, { useState } from "react";
+import { Route, RouteProps, Redirect, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import { CreateChannelService } from "../../services/firestore";
+
+const channelInitialState = {
+  name: "",
+};
+
 export const Add: React.FC<any> = () => {
-  const dispatch = useDispatch();
+  let history = useHistory();
+  const [input, setInput] = useState<any>(channelInitialState);
+
+  const { name } = input;
+
+  const Create = () => {
+    CreateChannelService(input);
+    setInput(channelInitialState);
+  };
 
   return (
     <div>
       <h1>Create Channel!</h1>
-      <button onClick={() => <Redirect to={"/"} />}>Add</button>
+      <input
+        value={name}
+        name="name"
+        onChange={(e) => setInput({ ...input, name: e.target.value })}
+      />
+      <button onClick={Create}>Add</button>
+      <button onClick={() => history.push("/")}>go Back</button>
     </div>
   );
 };
