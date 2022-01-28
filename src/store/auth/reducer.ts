@@ -10,12 +10,16 @@ import { ApplicationStore } from "../index";
 
 import { getToken, setToken, removeToken } from "../../services/auth";
 
-console.log("getToken()getToken()getToken()", getToken());
 const store = Immutable.from<AuthState>({
   auth: {},
   error: false,
   isAuth: getToken() !== null,
   loading: false,
+  userDetails: {
+    name: "",
+    email: "",
+    id: "",
+  },
 });
 
 const reducer: Reducer<ImmutableObjectMixin<AuthState> & AuthState> = (
@@ -29,6 +33,11 @@ const reducer: Reducer<ImmutableObjectMixin<AuthState> & AuthState> = (
         auth: {},
         isAuth: true,
         loading: false,
+        userDetails: {
+          name: action.payload.displayName,
+          email: action.payload.email,
+          id: action.payload.uid,
+        },
       });
 
     case AuthTypes.AUTH_SIGN_OUT:

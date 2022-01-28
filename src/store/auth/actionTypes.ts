@@ -23,4 +23,5 @@ export interface AuthState {
   readonly loading: boolean;
   readonly error: boolean;
   readonly isAuth: boolean;
+  userDetails: User;
 }
